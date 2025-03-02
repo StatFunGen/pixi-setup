@@ -15,10 +15,16 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup pixi
+        uses: prefix-dev/setup-pixi@v0.8.3
+        with:
+          run-install: false
+
       - name: Run setup script
+        shell: pixi exec --spec sed -- bash -e {0}
         run: |
-          sed -i "s/main/${GITHUB_REF}/g" install.sh
-          sed -i "s/main/${GITHUB_REF}/g" pixi_setup.sh
+          sed -i "s?main?${GITHUB_REF}?g" install.sh
+          sed -i "s?main?${GITHUB_REF}?g" pixi_setup.sh
           ./pixi_setup.sh
 
   osx-64:
@@ -32,10 +38,16 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup pixi
+        uses: prefix-dev/setup-pixi@v0.8.3
+        with:
+          run-install: false
+
       - name: Run setup script
+        shell: pixi exec --spec sed -- zsh -e {0}
         run: |
-          sed -i "s/main/${GITHUB_REF}/g" install.sh
-          sed -i "s/main/${GITHUB_REF}/g" pixi_setup.sh
+          sed -i "s?main?${GITHUB_REF}?g" install.sh
+          sed -i "s?main?${GITHUB_REF}?g" pixi_setup.sh
           ./pixi_setup.sh
 
   osx-arm64:
@@ -49,8 +61,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup pixi
+        uses: prefix-dev/setup-pixi@v0.8.3
+        with:
+          run-install: false
+
       - name: Run setup script
+        shell: pixi exec --spec sed -- zsh -e {0}
         run: |
-          sed -i "s/main/${GITHUB_REF}/g" install.sh
-          sed -i "s/main/${GITHUB_REF}/g" pixi_setup.sh
+          sed -i "s?main?${GITHUB_REF}?g" install.sh
+          sed -i "s?main?${GITHUB_REF}?g" pixi_setup.sh
           ./pixi_setup.sh
