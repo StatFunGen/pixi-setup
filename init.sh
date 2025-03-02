@@ -30,13 +30,13 @@ find ${HOME}/.pixi/envs/r-base/share/jupyter/kernels/ -maxdepth 1 -mindepth 1 -t
 
 # Jupyter configurations
 mkdir -p $HOME/.jupyter && \
-curl -s -o $HOME/.jupyter/jupyter_lab_config.py https://raw.githubusercontent.com/gaow/misc/master/bash/pixi/configs/jupyter/jupyter_lab_config.py && \
-curl -s -o $HOME/.jupyter/jupyter_server_config.py https://raw.githubusercontent.com/gaow/misc/master/bash/pixi/configs/jupyter/jupyter_server_config.py
+curl -s -o $HOME/.jupyter/jupyter_lab_config.py https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/configs/jupyter/jupyter_lab_config.py && \
+curl -s -o $HOME/.jupyter/jupyter_server_config.py https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/configs/jupyter/jupyter_server_config.py
 
 mkdir -p ${HOME}/.config/code-server
-curl -s -o $HOME/.config/code-server/config.yaml https://raw.githubusercontent.com/gaow/misc/master/bash/pixi/configs/vscode/config.yaml
+curl -s -o $HOME/.config/code-server/config.yaml https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/configs/vscode/config.yaml
 mkdir -p ${HOME}/.local/share/code-server/User
-curl -s -o $HOME/.local/share/code-server/User/settings.json https://raw.githubusercontent.com/gaow/misc/master/bash/pixi/configs/vscode/settings.json
+curl -s -o $HOME/.local/share/code-server/User/settings.json https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/configs/vscode/settings.json
 
 if ! command -v code-server &> /dev/null; then
    echo "WARNING: code-server is not installed."

@@ -42,10 +42,10 @@ if [[ -z ${PIXI_HOME:-} ]]; then
 fi
 
 # Install pixi
-curl -fsSL https://raw.githubusercontent.com/gaow/misc/master/bash/pixi/pixi-install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/pixi-install.sh | bash
 
 # Install global packages
-install_global_packages <(curl -fsSL https://raw.githubusercontent.com/gaow/misc/master/bash/pixi/envs/global_packages.txt | grep -v "#")
+install_global_packages <(curl -fsSL https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/envs/global_packages.txt | grep -v "#")
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     safe_expose_remove util-linux kill
 fi
@@ -57,13 +57,13 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 fi
 
 echo "Installing recommended R libraries ..."
-inject_packages r-base <(curl -fsSL https://raw.githubusercontent.com/gaow/misc/master/bash/pixi/envs/r_packages.txt | grep -v "#")
+inject_packages r-base <(curl -fsSL https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/envs/r_packages.txt | grep -v "#")
 echo "Installing recommended Python packages ..."
-inject_packages python <(curl -fsSL https://raw.githubusercontent.com/gaow/misc/master/bash/pixi/envs/python_packages.txt | grep -v "#")
+inject_packages python <(curl -fsSL https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/envs/python_packages.txt | grep -v "#")
 pixi clean cache -y
 
 # Install config files
-curl -fsSL https://raw.githubusercontent.com/gaow/misc/master/bash/pixi/init.sh | bash
+curl -fsSL https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/init.sh | bash
 
 # print messages
 BB='\033[1;34m'

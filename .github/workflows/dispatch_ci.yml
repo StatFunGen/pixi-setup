@@ -17,9 +17,9 @@ jobs:
 
       - name: Run setup script
         run: |
-          sed -i "s/master/${GITHUB_REF}/g" bash/pixi/install.sh
-          sed -i "s/master/${GITHUB_REF}/g" bash/pixi/pixi_setup.sh
-          bash/pixi/pixi_setup.sh
+          sed -i "s/main/${GITHUB_REF}/g" install.sh
+          sed -i "s/main/${GITHUB_REF}/g" pixi_setup.sh
+          ./pixi_setup.sh
 
   osx-64_pixi:
     runs-on: macos-latest
@@ -34,9 +34,9 @@ jobs:
 
       - name: Run setup script
         run: |
-          sed -i "s/master/${GITHUB_REF}/g" bash/pixi/install.sh
-          sed -i "s/master/${GITHUB_REF}/g" bash/pixi/pixi_setup.sh
-          bash/pixi/pixi_setup.sh
+          sed -i "s/main/${GITHUB_REF}/g" install.sh
+          sed -i "s/main/${GITHUB_REF}/g" pixi_setup.sh
+          ./pixi_setup.sh
 
   osx-arm64_pixi:
     runs-on: macos-14
@@ -51,6 +51,6 @@ jobs:
 
       - name: Run setup script
         run: |
-          sed -i "s/master/${GITHUB_REF}/g" bash/pixi/install.sh
-          sed -i "s/master/${GITHUB_REF}/g" bash/pixi/pixi_setup.sh
-          bash/pixi/pixi_setup.sh
+          sed -i "s/main/${GITHUB_REF}/g" install.sh
+          sed -i "s/main/${GITHUB_REF}/g" pixi_setup.sh
+          ./pixi_setup.sh
