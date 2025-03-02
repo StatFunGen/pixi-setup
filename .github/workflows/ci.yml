@@ -24,8 +24,8 @@ jobs:
         shell: pixi exec --spec sed -- bash -e {0}
         run: |
           sed -i "s?main?${GITHUB_REF}?g" init.sh
-          sed -i "s?main?${GITHUB_REF}?g" pixi_setup.sh
-          ./pixi_setup.sh
+          sed -i "s?main?${GITHUB_REF}?g" pixi-setup.sh
+          ./pixi-setup.sh
 
   osx-64:
     runs-on: macos-13
@@ -47,8 +47,8 @@ jobs:
         shell: pixi exec --spec sed -- zsh -e {0}
         run: |
           sed -i "s?main?${GITHUB_REF}?g" init.sh
-          sed -i "s?main?${GITHUB_REF}?g" pixi_setup.sh
-          ./pixi_setup.sh
+          sed -i "s?main?${GITHUB_REF}?g" pixi-setup.sh
+          ./pixi-setup.sh
 
   osx-arm64:
     runs-on: macos-14
@@ -70,5 +70,5 @@ jobs:
         shell: pixi exec --spec sed -- zsh -e {0}
         run: |
           sed -i "s?main?${GITHUB_REF}?g" init.sh
-          sed -i "s?main?${GITHUB_REF}?g" pixi_setup.sh
-          ./pixi_setup.sh
+          sed -i "s?main?${GITHUB_REF}?g" pixi-setup.sh
+          ./pixi-setup.sh
