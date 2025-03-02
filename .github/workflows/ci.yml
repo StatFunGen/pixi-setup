@@ -23,7 +23,7 @@ jobs:
       - name: Run setup script
         shell: pixi exec --spec sed -- bash -e {0}
         run: |
-          sed -i "s?main?${GITHUB_REF}?g" install.sh
+          sed -i "s?main?${GITHUB_REF}?g" init.sh
           sed -i "s?main?${GITHUB_REF}?g" pixi_setup.sh
           ./pixi_setup.sh
 
@@ -46,7 +46,7 @@ jobs:
       - name: Run setup script
         shell: pixi exec --spec sed -- zsh -e {0}
         run: |
-          sed -i "s?main?${GITHUB_REF}?g" install.sh
+          sed -i "s?main?${GITHUB_REF}?g" init.sh
           sed -i "s?main?${GITHUB_REF}?g" pixi_setup.sh
           ./pixi_setup.sh
 
@@ -69,6 +69,6 @@ jobs:
       - name: Run setup script
         shell: pixi exec --spec sed -- zsh -e {0}
         run: |
-          sed -i "s?main?${GITHUB_REF}?g" install.sh
+          sed -i "s?main?${GITHUB_REF}?g" init.sh
           sed -i "s?main?${GITHUB_REF}?g" pixi_setup.sh
           ./pixi_setup.sh
