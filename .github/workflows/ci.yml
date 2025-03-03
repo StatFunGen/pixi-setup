@@ -24,6 +24,7 @@ jobs:
         shell: pixi exec --spec sed -- bash -e {0}
         run: |
           sed -i "s?main?${{ github.event.pull_request.head.ref }}?g" init.sh
+          cat init.sh
           sed -i "s?main?${{ github.event.pull_request.head.ref }}?g" pixi-setup.sh
           ./pixi-setup.sh
 
