@@ -23,6 +23,7 @@ jobs:
       - name: Run setup script
         shell: pixi exec --spec sed -- bash -e {0}
         run: |
+          echo "${GITHUB_REF}"
           sed -i "s?main?${GITHUB_REF}?g" init.sh
           sed -i "s?main?${GITHUB_REF}?g" pixi-setup.sh
           ./pixi-setup.sh
