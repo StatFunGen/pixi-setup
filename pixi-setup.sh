@@ -54,6 +54,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     safe_expose_remove coreutils kill
     safe_expose_remove coreutils uptime
     install_global_packages <(echo "procps-ng")
+    install_global_packages <(echo "code-server")
 fi
 
 echo "Installing recommended R libraries ..."
