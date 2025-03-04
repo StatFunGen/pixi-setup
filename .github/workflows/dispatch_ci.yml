@@ -1,0 +1,74 @@
+name: Dispatch CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  linux-64_pixi:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Checkout pull request branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pixi
+        uses: prefix-dev/setup-pixi@v0.8.3
+        with:
+          run-install: false
+
+      - name: Run setup script
+        shell: pixi exec --spec sed -- bash -e {0}
+        run: |
+          sed -i "s?main?${{ github.event.pull_request.head.ref }}?g" pixi-setup.sh
+          sed -i "s?init.sh | bash?init.sh | sed 's,main,${{ github.event.pull_request.head.ref }},g' | bash?" pixi-setup.sh
+          ./pixi-setup.sh
+
+  osx-64_pixi:
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Checkout pull request branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pixi
+        uses: prefix-dev/setup-pixi@v0.8.3
+        with:
+          run-install: false
+
+      - name: Run setup script
+        shell: pixi exec --spec sed -- bash -e {0}
+        run: |
+          sed -i "s?main?${{ github.event.pull_request.head.ref }}?g" pixi-setup.sh
+          sed -i "s?init.sh | bash?init.sh | sed 's,main,${{ github.event.pull_request.head.ref }},g' | bash?" pixi-setup.sh
+          ./pixi-setup.sh
+
+  osx-arm64_pixi:
+    runs-on: macos-14
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Checkout pull request branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pixi
+        uses: prefix-dev/setup-pixi@v0.8.3
+        with:
+          run-install: false
+
+      - name: Run setup script
+        shell: pixi exec --spec sed -- bash -e {0}
+        run: |
+          sed -i "s?main?${{ github.event.pull_request.head.ref }}?g" pixi-setup.sh
+          sed -i "s?init.sh | bash?init.sh | sed 's,main,${{ github.event.pull_request.head.ref }},g' | bash?" pixi-setup.sh
+          ./pixi-setup.sh
