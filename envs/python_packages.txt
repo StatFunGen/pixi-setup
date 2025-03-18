@@ -36,6 +36,7 @@ pillow
 ptpython
 pyarrow
 python-lsp-server
+qtl
 scikit-learn
 scipy
 seaborn
