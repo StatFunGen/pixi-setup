@@ -17,7 +17,18 @@ export -f safe_expose_remove
 
 install_global_packages() {
     package_list=$1
-    missing_pkgs=$(comm -13 <(ls ${HOME}/.pixi/envs | sort -u) <(sort -u ${package_list}))
+    
+    # Check if the directory exists, if not, create an empty list of packages
+    if [ ! -d ${HOME}/.pixi/envs ]; then
+        mkdir -p ${HOME}/.pixi/envs
+        existing_pkgs=""
+    else
+        existing_pkgs=$(ls ${HOME}/.pixi/envs 2>/dev/null | sort -u || echo "")
+    fi
+    
+    # Use the existing packages or empty string to compare with desired packages
+    missing_pkgs=$(comm -13 <(echo "$existing_pkgs" | sort -u) <(sort -u ${package_list}))
+    
     if (($(echo ${missing_pkgs} | wc -w) > 0 )); then
         pixi global install $(echo ${missing_pkgs} | tr '\n' ' ')
     fi
@@ -28,7 +39,14 @@ export -f install_global_packages
 inject_packages() {
     environment=$1
     package_list=$2
-    missing_pkgs=$(comm -13 <(pixi global list --environment ${environment} | cut -f 1 -d ' ' | head -n -6 | tail -n +3 | sort -u) <(sort -u ${package_list}))
+    
+    # Check if the environment exists before trying to list packages
+    if [ ! -d ${HOME}/.pixi/envs/${environment} ]; then
+        missing_pkgs=$(cat ${package_list})
+    else
+        missing_pkgs=$(comm -13 <(pixi global list --environment ${environment} | cut -f 1 -d ' ' | head -n -6 | tail -n +3 | sort -u) <(sort -u ${package_list}))
+    fi
+    
     if (( $(echo ${missing_pkgs} | wc -w) > 0 )); then
         pixi global install --environment ${environment} $(echo ${missing_pkgs} | tr '\n' ' ')
     fi
@@ -41,15 +59,21 @@ if [[ -z ${PIXI_HOME:-} ]]; then
     export PIXI_HOME="${HOME}/.pixi"
 fi
 
+# Ensure PIXI_HOME exists
+mkdir -p ${PIXI_HOME}
+
 # Install pixi
 curl -fsSL https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/pixi-install.sh | bash
 
 # Install global packages
 install_global_packages <(curl -fsSL https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/envs/global_packages.txt | grep -v "#")
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     safe_expose_remove util-linux kill
 fi
+
 install_global_packages <(echo "coreutils")
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     safe_expose_remove coreutils kill
     safe_expose_remove coreutils uptime
@@ -59,8 +83,10 @@ fi
 
 echo "Installing recommended R libraries ..."
 inject_packages r-base <(curl -fsSL https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/envs/r_packages.txt | grep -v "#")
+
 echo "Installing recommended Python packages ..."
 inject_packages python <(curl -fsSL https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/envs/python_packages.txt | grep -v "#")
+
 pixi clean cache -y
 
 # Install config files
