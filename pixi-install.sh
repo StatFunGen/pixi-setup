@@ -36,12 +36,6 @@ fi
 if ! grep -q 'export PYDEVD_DISABLE_FILE_VALIDATION=1' "${CONFIG_FILE}"; then
   echo "export PYDEVD_DISABLE_FILE_VALIDATION=1" >> "${CONFIG_FILE}"
 fi
-if ! which pixi > /dev/null 2>&1
-then
-    BB='\033[1;34m'
-    NC='\033[0m'
-    echo -e "${BB}pixi installed. Please run 'source ${CONFIG_FILE}' to reload your configuration or restart your terminal, and rerun this setup script.${NC}"
-    exit 1
-fi
+
 # set default channels
 mkdir -p ${HOME}/.pixi && echo 'default_channels = ["dnachun", "conda-forge", "bioconda"]' > ${HOME}/.pixi/config.toml
