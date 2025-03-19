@@ -44,6 +44,7 @@ r-pacman
 r-pecotmr
 r-pgenlibr
 r-plink2r
+r-plinkqc
 r-profvis
 r-qgg
 r-qqman
