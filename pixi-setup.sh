@@ -69,7 +69,7 @@ if ! which pixi > /dev/null 2>&1
 then
     BB='\033[1;34m'
     NC='\033[0m'
-    echo -e "${BB}pixi installed. Please run 'source ${CONFIG_FILE}' to reload your configuration or restart your terminal, and rerun this setup script.${NC}"
+    echo -e "${BB}pixi installed. Please run 'source ${CONFIG_FILE}' to reload your configuration or restart your terminal, and rerun this setup script in order to complete the rest of the installation.${NC}"
     exit 1
 fi
 
