@@ -85,8 +85,7 @@ install_global_packages <(echo "coreutils")
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     safe_expose_remove coreutils kill
     safe_expose_remove coreutils uptime
-    install_global_packages <(echo "procps-ng")
-    install_global_packages <(echo "code-server")
+    install_global_packages <(curl -fsSL https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/envs/global_packages_linux.txt | grep -v "#")
 fi
 
 echo "Installing recommended R libraries ..."
