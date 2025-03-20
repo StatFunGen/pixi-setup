@@ -22,6 +22,8 @@ jupyterhub
 markdown
 markdown-kernel
 matplotlib-base
+mofapy2
+multipy
 nb_conda_kernels
 nbconvert-core
 nbdime
@@ -35,7 +37,10 @@ pandas
 pillow
 ptpython
 pyarrow
+pybigwig
+python-ldstore
 python-lsp-server
+qvalue
 scikit-learn
 scipy
 seaborn
