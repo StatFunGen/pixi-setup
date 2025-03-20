@@ -19,7 +19,6 @@ gtex-pipeline-gene_model
 gtex-pipeline-qtl
 gtex-pipeline-rnaseq
 htslib
-kallisto
 kent-tools
 king
 less
