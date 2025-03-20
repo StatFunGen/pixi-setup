@@ -14,6 +14,7 @@ bioconductor-sesamedata
 bioconductor-variantannotation
 r-abind
 r-ape
+r-bedtoolsr
 r-bigsnpr
 r-biocmanager
 r-bitops
@@ -43,7 +44,6 @@ r-mvsusier
 r-pacman
 r-pecotmr
 r-pgenlibr
-r-plink2r
 r-plinkqc
 r-profvis
 r-qgg
