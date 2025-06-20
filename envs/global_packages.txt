@@ -21,6 +21,7 @@ gtex-pipeline-qtl
 gtex-pipeline-rnaseq
 htslib
 king
+kent-tools
 less
 metal
 multiqc
