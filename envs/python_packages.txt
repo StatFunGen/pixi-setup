@@ -48,6 +48,7 @@ seaborn
 statsmodels
 sympy
 tqdm
+tensorqtl
 wand
 widgetsnbextension
 sos
