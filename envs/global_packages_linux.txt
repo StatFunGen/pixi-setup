@@ -2,3 +2,4 @@ code-server
 gcta
 ldstore
 procps-ng
+kent-tools

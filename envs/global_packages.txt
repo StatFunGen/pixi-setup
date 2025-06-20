@@ -20,7 +20,6 @@ gtex-pipeline-gene_model
 gtex-pipeline-qtl
 gtex-pipeline-rnaseq
 htslib
-kent-tools
 king
 less
 metal
