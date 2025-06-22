@@ -19,6 +19,7 @@ r-bigsnpr
 r-biocmanager
 r-bitops
 r-catools
+r-colocboost
 r-complexupset
 r-corrplot
 r-devtools
