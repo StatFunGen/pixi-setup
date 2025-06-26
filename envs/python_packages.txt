@@ -1,5 +1,6 @@
 altair
 bash_kernel
+bitarray
 cython
 dill
 feather-format
