@@ -1,3 +1,5 @@
+bioconductor-annotationdbi
+bioconductor-clusterprofiler
 bioconductor-edger
 bioconductor-illuminahumanmethylation450kmanifest
 bioconductor-illuminahumanmethylationepicmanifest
@@ -5,6 +7,7 @@ bioconductor-impute
 bioconductor-limma
 bioconductor-minfi
 bioconductor-mofa2
+bioconductor-org.hs.eg.db
 bioconductor-pcatools
 bioconductor-preprocesscore
 bioconductor-psichomics
@@ -13,6 +16,7 @@ bioconductor-sesame
 bioconductor-sesamedata
 bioconductor-variantannotation
 r-abind
+r-arrow
 r-ape
 r-bedtoolsr
 r-bigsnpr
