@@ -27,6 +27,7 @@ metal
 multiqc
 pandoc
 parallel
+perl
 picard
 plink
 plink2
