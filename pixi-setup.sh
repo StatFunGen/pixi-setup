@@ -66,11 +66,12 @@ _default_pixi_home="${HOME}/.pixi"
 echo ""
 echo "Where should pixi store its environments and packages?"
 echo "  Default: ${_default_pixi_home}"
-echo "  NOTE: Home directories often have storage quotas on HPC systems."
-echo "  Consider a path on a larger filesystem, e.g. /lab/yourlab/.pixi"
+echo "  NOTE: Home directories have storage quotas. On HPC, prefer VAST over"
+echo "  GPFS/Lustre for better small-file I/O. e.g. /lab/yourlab/.pixi"
 echo ""
 read -r -p "Installation path [${_default_pixi_home}]: " _user_pixi_home
 export PIXI_HOME="${_user_pixi_home:-${_default_pixi_home}}"
+export RATTLER_CACHE_DIR="${PIXI_HOME}/cache"
 echo "Using PIXI_HOME=${PIXI_HOME}"
 
 # --- Prompt: install type ---
@@ -148,6 +149,14 @@ fi
 # print messages
 BB='\033[1;34m'
 NC='\033[0m'
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    _shell_config="${HOME}/.zshrc"
+else
+    _shell_config="${HOME}/.bashrc"
+fi
 echo -e "${BB}Installation completed. Pixi is installed at: ${PIXI_HOME}${NC}"
 echo -e "${BB}Note: From now on you can install other R packages as needed with 'pixi global install --environment r-base ...'${NC}"
 echo -e "${BB}and Python with 'pixi global install --environment python ...'${NC}"
+echo -e "${BB}To keep the package cache in ${PIXI_HOME}/cache across all future sessions,${NC}"
+echo -e "${BB}add this line to ${_shell_config}:${NC}"
+echo -e "${BB}  export RATTLER_CACHE_DIR=\"${PIXI_HOME}/cache\"${NC}"
