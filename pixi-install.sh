@@ -27,8 +27,9 @@ else
 fi
 
 # Configure shell
-if ! grep -q 'export PATH=${HOME}/.pixi/bin:${PATH}' "${CONFIG_FILE}"; then
-    echo 'export PATH=${HOME}/.pixi/bin:${PATH}' >> "${CONFIG_FILE}"
+_pixi_bin="${PIXI_HOME:-${HOME}/.pixi}/bin"
+if ! grep -q "${_pixi_bin}" "${CONFIG_FILE}"; then
+    echo "export PATH=${_pixi_bin}:\${PATH}" >> "${CONFIG_FILE}"
 fi
 if ! grep -q 'unset PYTHONPATH' "${CONFIG_FILE}"; then
   echo "unset PYTHONPATH" >> "${CONFIG_FILE}"
@@ -38,4 +39,6 @@ if ! grep -q 'export PYDEVD_DISABLE_FILE_VALIDATION=1' "${CONFIG_FILE}"; then
 fi
 
 # set default channels
-mkdir -p ${HOME}/.pixi && echo 'default_channels = ["dnachun", "conda-forge", "bioconda"]' > ${HOME}/.pixi/config.toml
+_pixi_dir="${PIXI_HOME:-${HOME}/.pixi}"
+mkdir -p "${_pixi_dir}"
+echo 'default_channels = ["dnachun", "conda-forge", "bioconda"]' > "${_pixi_dir}/config.toml"

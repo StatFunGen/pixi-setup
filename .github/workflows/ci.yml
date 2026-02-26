@@ -25,7 +25,7 @@ jobs:
         run: |
           sed -i "s?main?${{ github.event.pull_request.head.ref }}?g" pixi-setup.sh
           sed -i "s?init.sh | bash?init.sh | sed 's,main,${{ github.event.pull_request.head.ref }},g' | bash?" pixi-setup.sh
-          ./pixi-setup.sh
+          printf "\n1\n" | ./pixi-setup.sh
 
   osx-64:
     runs-on: macos-13
@@ -48,7 +48,7 @@ jobs:
         run: |
           sed -i "s?main?${{ github.event.pull_request.head.ref }}?g" pixi-setup.sh
           sed -i "s?init.sh | bash?init.sh | sed 's,main,${{ github.event.pull_request.head.ref }},g' | bash?" pixi-setup.sh
-          ./pixi-setup.sh
+          printf "\n1\n" | ./pixi-setup.sh
 
   osx-arm64:
     runs-on: macos-14
@@ -71,4 +71,4 @@ jobs:
         run: |
           sed -i "s?main?${{ github.event.pull_request.head.ref }}?g" pixi-setup.sh
           sed -i "s?init.sh | bash?init.sh | sed 's,main,${{ github.event.pull_request.head.ref }},g' | bash?" pixi-setup.sh
-          ./pixi-setup.sh
+          printf "\n1\n" | ./pixi-setup.sh
