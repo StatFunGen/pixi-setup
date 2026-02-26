@@ -67,7 +67,7 @@ echo ""
 echo "Where should pixi store its environments and packages?"
 echo "  Default: ${_default_pixi_home}"
 echo "  NOTE: Home directories have storage quotas. On HPC, prefer VAST over"
-echo "  GPFS/Lustre for better small-file I/O. e.g. /lab/yourlab/.pixi"
+echo "  GPFS/Lustre for better small-file I/O. e.g. /lab/$USER/.pixi"
 echo ""
 read -r -p "Installation path [${_default_pixi_home}]: " _user_pixi_home
 export PIXI_HOME="${_user_pixi_home:-${_default_pixi_home}}"
@@ -120,7 +120,11 @@ if [[ "${INSTALL_TYPE}" == "minimal" ]]; then
 
 else
     # --- Full install ---
-    install_global_packages <(curl -fsSL https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/envs/global_packages.txt | grep -v "#")
+    _full_url="https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/envs/full_packages.txt"
+    _full_file=$(mktemp)
+    curl -fsSL "${_full_url}" -o "${_full_file}"
+
+    install_global_packages <(extract_section "${_full_file}" "global")
 
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         safe_expose_remove util-linux kill
@@ -131,15 +135,16 @@ else
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         safe_expose_remove coreutils kill
         safe_expose_remove coreutils uptime
-        install_global_packages <(curl -fsSL https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/envs/global_packages_linux.txt | grep -v "#")
+        install_global_packages <(extract_section "${_full_file}" "global_linux")
     fi
 
     echo "Installing recommended R libraries ..."
-    inject_packages r-base <(curl -fsSL https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/envs/r_packages.txt | grep -v "#")
+    inject_packages r-base <(extract_section "${_full_file}" "r")
 
     echo "Installing recommended Python packages ..."
-    inject_packages python <(curl -fsSL https://raw.githubusercontent.com/StatFunGen/pixi-setup/main/envs/python_packages.txt | grep -v "#")
+    inject_packages python <(extract_section "${_full_file}" "python")
 
+    rm -f "${_full_file}"
     pixi clean cache -y
 
     # Install config files
