@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -o errexit -o nounset -o xtrace -o pipefail
+set -o errexit -o nounset -o pipefail
 
 # Use PIXI_HOME if set (e.g. custom HPC path), otherwise fall back to default
 PIXI_HOME="${PIXI_HOME:-${HOME}/.pixi}"
