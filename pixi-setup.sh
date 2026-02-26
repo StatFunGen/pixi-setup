@@ -67,8 +67,7 @@ echo ""
 echo "Where should pixi store its environments and packages?"
 echo "  Default: ${_default_pixi_home}"
 echo "  NOTE: Home directories often have storage quotas on HPC systems."
-echo "  Consider a path on a larger filesystem, e.g.:"
-echo "    /lab/yourlab/.pixi"
+echo "  Consider a path on a larger filesystem, e.g. /lab/yourlab/.pixi"
 echo ""
 read -r -p "Installation path [${_default_pixi_home}]: " _user_pixi_home
 export PIXI_HOME="${_user_pixi_home:-${_default_pixi_home}}"
@@ -77,9 +76,11 @@ echo "Using PIXI_HOME=${PIXI_HOME}"
 # --- Prompt: install type ---
 echo ""
 echo "Choose installation type:"
-echo "  1) minimal - Essential CLI tools + Python data science + base R (fast)"
+echo "  1) minimal - Essential CLI tools + Python data science + base R"
+echo "               ~7 GB, ~100k files"
 echo "  2) full    - Complete bioinformatics environment (samtools, GATK, plink,"
 echo "               STAR, Seurat, bioconductor packages, etc.)"
+echo "               ~35 GB, ~350k files"
 echo ""
 read -r -p "Install type [1=minimal, 2=full, default=1]: " _install_type_input
 case "${_install_type_input:-1}" in
