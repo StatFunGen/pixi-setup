@@ -1,6 +1,0 @@
-code-server
-fastlmmc
-gcta
-ldstore
-procps-ng
-regenie
