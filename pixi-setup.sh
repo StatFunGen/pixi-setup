@@ -68,7 +68,7 @@ echo "Where should pixi store its environments and packages?"
 echo "  Default: ${_default_pixi_home}"
 echo "  NOTE: Home directories often have storage quotas on HPC systems."
 echo "  Consider a path on a larger filesystem, e.g.:"
-echo "    /scratch/${USER}/.pixi   or   /lab/yourlab/.pixi"
+echo "    /lab/yourlab/.pixi"
 echo ""
 read -r -p "Installation path [${_default_pixi_home}]: " _user_pixi_home
 export PIXI_HOME="${_user_pixi_home:-${_default_pixi_home}}"
