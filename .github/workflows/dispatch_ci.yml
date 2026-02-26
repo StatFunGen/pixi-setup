@@ -25,7 +25,7 @@ jobs:
         run: |
           sed -i "s?main?${{ github.ref_name }}?g" pixi-setup.sh
           sed -i "s?init.sh | bash?init.sh | sed 's,main,${{ github.ref_name }},g' | bash?" pixi-setup.sh
-          printf '\n\n' | ./pixi-setup.sh
+          printf "\n1\n" | ./pixi-setup.sh
 
   osx-64_pixi:
     runs-on: macos-latest
@@ -48,7 +48,7 @@ jobs:
         run: |
           sed -i "s?main?${{ github.ref_name }}?g" pixi-setup.sh
           sed -i "s?init.sh | bash?init.sh | sed 's,main,${{ github.ref_name }},g' | bash?" pixi-setup.sh
-          printf '\n\n' | ./pixi-setup.sh
+          printf "\n1\n" | ./pixi-setup.sh
 
   osx-arm64_pixi:
     runs-on: macos-14
@@ -71,4 +71,4 @@ jobs:
         run: |
           sed -i "s?main?${{ github.ref_name }}?g" pixi-setup.sh
           sed -i "s?init.sh | bash?init.sh | sed 's,main,${{ github.ref_name }},g' | bash?" pixi-setup.sh
-          printf '\n\n' | ./pixi-setup.sh
+          printf "\n1\n" | ./pixi-setup.sh

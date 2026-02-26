@@ -67,7 +67,7 @@ echo ""
 echo "Where should pixi store its environments and packages?"
 echo "  Default: ${_default_pixi_home}"
 echo "  NOTE: Home directories have storage quotas. On HPC, prefer VAST over"
-echo "  GPFS/Lustre for better small-file I/O. e.g. /lab/$USER/.pixi"
+echo "  GPFS/Lustre for better small-file I/O. e.g. /lab/\$USER/.pixi"
 echo ""
 read -r -p "Installation path [${_default_pixi_home}]: " _user_pixi_home
 export PIXI_HOME="${_user_pixi_home:-${_default_pixi_home}}"
