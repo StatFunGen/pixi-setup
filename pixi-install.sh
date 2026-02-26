@@ -38,10 +38,7 @@ if ! grep -q 'export PYDEVD_DISABLE_FILE_VALIDATION=1' "${CONFIG_FILE}"; then
   echo "export PYDEVD_DISABLE_FILE_VALIDATION=1" >> "${CONFIG_FILE}"
 fi
 
-# set default channels and redirect cache into PIXI_HOME
+# set default channels
 _pixi_dir="${PIXI_HOME:-${HOME}/.pixi}"
 mkdir -p "${_pixi_dir}"
-cat > "${_pixi_dir}/config.toml" << EOF
-default_channels = ["dnachun", "conda-forge", "bioconda"]
-cache_dir = "${_pixi_dir}/cache"
-EOF
+echo 'default_channels = ["dnachun", "conda-forge", "bioconda"]' > "${_pixi_dir}/config.toml"
