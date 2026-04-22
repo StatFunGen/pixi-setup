@@ -61,6 +61,30 @@ extract_section() {
 
 export -f extract_section
 
+repair_preprocesscore_for_sesame() {
+    if [[ "$OSTYPE" != "linux-gnu"* ]]; then
+        return 0
+    fi
+
+    local rscript="${PIXI_HOME}/envs/r-base/bin/Rscript"
+    if [ ! -x "${rscript}" ]; then
+        echo "ERROR: ${rscript} not found after pixi r-base install." >&2
+        return 1
+    fi
+
+    local ca_bundle="/etc/ssl/certs/ca-certificates.crt"
+    if [ -f "${ca_bundle}" ]; then
+        export CURL_CA_BUNDLE="${CURL_CA_BUNDLE:-${ca_bundle}}"
+        export SSL_CERT_FILE="${SSL_CERT_FILE:-${ca_bundle}}"
+    fi
+
+    export MAKEFLAGS="${MAKEFLAGS:--j1}"
+    echo "Reinstalling preprocessCore from source with --disable-threading on Linux ..."
+    "${rscript}" -e 'stopifnot(requireNamespace("BiocManager", quietly = TRUE), requireNamespace("preprocessCore", quietly = TRUE)); options(repos = BiocManager::repositories()); BiocManager::install("preprocessCore", type = "source", configure.args = "--disable-threading", force = TRUE, update = FALSE, ask = FALSE, Ncpus = 1L)'
+}
+
+export -f repair_preprocesscore_for_sesame
+
 # --- Prompt: installation path ---
 _default_pixi_home="${HOME}/.pixi"
 echo ""
@@ -140,6 +164,7 @@ else
 
     echo "Installing recommended R libraries ..."
     inject_packages r-base <(extract_section "${_full_file}" "r")
+    repair_preprocesscore_for_sesame
 
     echo "Installing recommended Python packages ..."
     inject_packages python <(extract_section "${_full_file}" "python")
