@@ -27,29 +27,6 @@ jobs:
           sed -i "s?init.sh | bash?init.sh | sed 's,StatFunGen/pixi-setup/main,${{ github.repository }}/${{ github.ref_name }},g' | bash?" pixi-setup.sh
           printf "\n1\n" | ./pixi-setup.sh
 
-  osx-64_pixi:
-    runs-on: macos-latest
-    strategy:
-      fail-fast: false
-
-    steps:
-      - name: Checkout pull request branch
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup pixi
-        uses: prefix-dev/setup-pixi@v0.8.3
-        with:
-          run-install: false
-
-      - name: Run setup script
-        shell: pixi exec --spec sed -- bash -e {0}
-        run: |
-          sed -i "s?StatFunGen/pixi-setup/main?${{ github.repository }}/${{ github.ref_name }}?g" pixi-setup.sh
-          sed -i "s?init.sh | bash?init.sh | sed 's,StatFunGen/pixi-setup/main,${{ github.repository }}/${{ github.ref_name }},g' | bash?" pixi-setup.sh
-          printf "\n1\n" | ./pixi-setup.sh
-
   osx-arm64_pixi:
     runs-on: macos-14
     strategy:
