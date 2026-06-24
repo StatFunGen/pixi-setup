@@ -129,7 +129,7 @@ bioconductor-annotationdbi
 bioconductor-clusterprofiler
 bioconductor-edger
 bioconductor-genomeinfodb
-bioconductor-genomeinfodbdasta
+bioconductor-genomeinfodbdata
 bioconductor-illuminahumanmethylation450kmanifest
 bioconductor-illuminahumanmethylationepicmanifest
 bioconductor-limma
