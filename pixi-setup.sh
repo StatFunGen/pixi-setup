@@ -30,7 +30,7 @@ install_global_packages() {
     missing_pkgs=$(comm -13 <(echo "$existing_pkgs" | sort -u) <(sort -u ${package_list}))
 
     if (($(echo ${missing_pkgs} | wc -w) > 0 )); then
-        pixi global install $(echo ${missing_pkgs} | tr '\n' ' ')
+        pixi global install --run-post-link-scripts $(echo ${missing_pkgs} | tr '\n' ' ')
     fi
 }
 
@@ -48,7 +48,7 @@ inject_packages() {
     fi
 
     if (( $(echo ${missing_pkgs} | wc -w) > 0 )); then
-        pixi global install --environment ${environment} $(echo ${missing_pkgs} | tr '\n' ' ')
+        pixi global install --run-post-link-scripts --environment ${environment} $(echo ${missing_pkgs} | tr '\n' ' ')
     fi
 }
 
