@@ -22,6 +22,8 @@ jobs:
 
       - name: Run setup script
         shell: pixi exec --spec sed -- bash -e {0}
+        env:
+          INSTALL_TYPE=full
         run: |
           sed -i "s?main?${{ github.event.pull_request.head.ref }}?g" pixi-setup.sh
           sed -i "s?init.sh | bash?init.sh | sed 's,main,${{ github.event.pull_request.head.ref }},g' | bash?" pixi-setup.sh
@@ -45,6 +47,8 @@ jobs:
 
       - name: Run setup script
         shell: pixi exec --spec sed -- zsh -e {0}
+        env:
+          INSTALL_TYPE=full
         run: |
           sed -i "s?main?${{ github.event.pull_request.head.ref }}?g" pixi-setup.sh
           sed -i "s?init.sh | bash?init.sh | sed 's,main,${{ github.event.pull_request.head.ref }},g' | bash?" pixi-setup.sh
