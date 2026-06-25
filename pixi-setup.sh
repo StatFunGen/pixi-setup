@@ -30,7 +30,7 @@ install_global_packages() {
     missing_pkgs=$(comm -13 <(echo "$existing_pkgs" | sort -u) <(sort -u ${package_list}))
 
     if (($(echo ${missing_pkgs} | wc -w) > 0 )); then
-        pixi global install $(echo ${missing_pkgs} | tr '\n' ' ')
+        pixi global install --run-post-link-scripts $(echo ${missing_pkgs} | tr '\n' ' ')
     fi
 }
 
@@ -48,7 +48,7 @@ inject_packages() {
     fi
 
     if (( $(echo ${missing_pkgs} | wc -w) > 0 )); then
-        pixi global install --environment ${environment} $(echo ${missing_pkgs} | tr '\n' ' ')
+        pixi global install --run-post-link-scripts --environment ${environment} $(echo ${missing_pkgs} | tr '\n' ' ')
     fi
 }
 
@@ -74,21 +74,36 @@ export PIXI_HOME="${_user_pixi_home:-${_default_pixi_home}}"
 export RATTLER_CACHE_DIR="${PIXI_HOME}/cache"
 echo "Using PIXI_HOME=${PIXI_HOME}"
 
-# --- Prompt: install type ---
-echo ""
-echo "Choose installation type:"
-echo "  1) minimal - Essential CLI tools + Python data science + base R"
-echo "               ~5 GB, ~100k files"
-echo "  2) full    - Complete bioinformatics environment (samtools, GATK, plink,"
-echo "               STAR, Seurat, bioconductor packages, etc.)"
-echo "               ~35 GB, ~350k files"
-echo ""
-read -r -p "Install type [1=minimal, 2=full, default=1]: " _install_type_input
-case "${_install_type_input:-1}" in
-    2|full)    INSTALL_TYPE="full" ;;
-    *)         INSTALL_TYPE="minimal" ;;
-esac
-echo "Installation type: ${INSTALL_TYPE}"
+# --- Install type ---
+# Allow a preset INSTALL_TYPE env var to override the prompt (e.g. for
+# non-interactive runs). A set-but-invalid value is a hard error.
+if [[ -n "${INSTALL_TYPE:-}" ]]; then
+    case "$(echo "${INSTALL_TYPE}" | tr '[:upper:]' '[:lower:]')" in
+        2|full)    INSTALL_TYPE="full" ;;
+        1|minimal) INSTALL_TYPE="minimal" ;;
+        *)
+            echo "ERROR: invalid INSTALL_TYPE='${INSTALL_TYPE}' (expected 'minimal'/'1' or 'full'/'2')" >&2
+            exit 1
+            ;;
+    esac
+    echo "Installation type: ${INSTALL_TYPE} (from INSTALL_TYPE environment variable)"
+else
+    # --- Prompt: install type ---
+    echo ""
+    echo "Choose installation type:"
+    echo "  1) minimal - Essential CLI tools + Python data science + base R"
+    echo "               ~5 GB, ~100k files"
+    echo "  2) full    - Complete bioinformatics environment (samtools, GATK, plink,"
+    echo "               STAR, Seurat, bioconductor packages, etc.)"
+    echo "               ~35 GB, ~350k files"
+    echo ""
+    read -r -p "Install type [1=minimal, 2=full, default=1]: " _install_type_input
+    case "${_install_type_input:-1}" in
+        2|full)    INSTALL_TYPE="full" ;;
+        *)         INSTALL_TYPE="minimal" ;;
+    esac
+    echo "Installation type: ${INSTALL_TYPE}"
+fi
 
 # Ensure PIXI_HOME exists
 mkdir -p "${PIXI_HOME}"

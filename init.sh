@@ -51,10 +51,3 @@ else
    code-server --install-extension ionutvmi.path-autocomplete
    code-server --install-extension usernamehw.errorlens
 fi
-
-# Temporary fix to run post-link scripts (only present in full install with bioconductor packages)
-if [ -f "${PIXI_HOME}/envs/r-base/bin/.bioconductor-genomeinfodbdata-post-link.sh" ]; then
-    bash -c "PREFIX=${PIXI_HOME}/envs/r-base PATH=${PIXI_HOME}/envs/r-base/bin:${PATH} .bioconductor-genomeinfodbdata-post-link.sh"
-fi
-find ${PIXI_HOME}/envs/r-base/bin -name '*bioconductor-*-post-link.sh' | \
-xargs -I % bash -c "PREFIX=${PIXI_HOME}/envs/r-base PATH=${PIXI_HOME}/envs/r-base/bin:${PATH} %"
