@@ -68,6 +68,7 @@ altair
 bash_kernel
 bitarray
 cython
+cyvcf2
 dill
 feather-format
 imageio
@@ -164,6 +165,7 @@ r-irkernel
 r-languageserver
 r-mediation
 r-missforest
+r-optparse
 r-pacman
 r-pecotmr
 r-profvis
