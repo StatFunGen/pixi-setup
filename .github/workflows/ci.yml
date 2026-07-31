@@ -4,10 +4,20 @@ on:
   pull_request:
 
 jobs:
-  linux-64:
-    runs-on: ubuntu-latest
+  concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: CI (${{ matrix.platform }} / ${{ matrix.environment }})
+    runs-on: ${{ matrix.runner }}
+    env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     strategy:
       fail-fast: false
+      matrix:
+        runner: [ubuntu-latest, macos-latest, ubuntu-24.04-arm]
 
     steps:
       - name: Checkout pull request branch
@@ -21,32 +31,7 @@ jobs:
           run-install: false
 
       - name: Run setup script
-        shell: pixi exec --spec sed -- bash -e {0}
-        env:
-          INSTALL_TYPE: full
-        run: |
-          sed -i "s?main?${{ github.event.pull_request.head.ref }}?g" pixi-setup.sh
-          sed -i "s?init.sh | bash?init.sh | sed 's,main,${{ github.event.pull_request.head.ref }},g' | bash?" pixi-setup.sh
-          printf "\n1\n" | ./pixi-setup.sh
-
-  osx-arm64:
-    runs-on: macos-14
-    strategy:
-      fail-fast: false
-
-    steps:
-      - name: Checkout pull request branch
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup pixi
-        uses: prefix-dev/setup-pixi@v0.8.3
-        with:
-          run-install: false
-
-      - name: Run setup script
-        shell: pixi exec --spec sed -- zsh -e {0}
+        shell: pixi exec --spec sed --spec bash -- bash -e {0}
         env:
           INSTALL_TYPE: full
         run: |

@@ -2,11 +2,13 @@
 # Sections: [global], [global_linux], [python], [r]
 
 # [global]
+apex
 ark
 awscli
 bamtools
 bcftools
 bedtools
+coreutils
 curl
 deeptools
 diffutils
@@ -16,13 +18,16 @@ fastp
 findutils
 gatk4
 gawk
+gcta
 gffread
 git
 go-ghq
+gregor
 grep
 gtex-pipeline-gene_model
 gtex-pipeline-qtl
 gtex-pipeline-rnaseq
+gzip
 htslib
 king
 kent-tools
@@ -33,11 +38,12 @@ pandoc
 parallel
 perl
 picard
+polyfun
 plink
 plink2
 python=3.12
 quantas
-r-base=4.4
+r-base=4.5
 regtools
 ripgrep
 rnaseqc
@@ -48,6 +54,7 @@ sed
 snpeff
 snpsift
 star
+suppa
 tree
 trimmomatic
 unzip
@@ -58,7 +65,6 @@ wget
 # [global_linux]
 code-server
 fastlmmc
-gcta
 ldstore
 procps-ng
 regenie
@@ -107,6 +113,9 @@ pillow
 ptpython
 pyarrow
 pybigwig
+pytest
+pytest-cov
+pytest-xdist
 python-ldstore
 python-lsp-server
 qvalue
@@ -119,6 +128,7 @@ tqdm
 tensorqtl
 wand
 widgetsnbextension
+setuptools<82
 sos
 sos-bash
 sos-notebook
@@ -127,13 +137,20 @@ sos-r
 
 # [r]
 bioconductor-annotationdbi
+bioconductor-annotationhub
+bioconductor-biomart
 bioconductor-clusterprofiler
 bioconductor-edger
 bioconductor-genomeinfodb
 bioconductor-genomeinfodbdata
 bioconductor-illuminahumanmethylation450kmanifest
 bioconductor-illuminahumanmethylationepicmanifest
+bioconductor-illuminahumanmethylation450kanno.ilmn12.hg19
+bioconductor-impute
+bioconductor-intact
 bioconductor-limma
+bioconductor-minfi
+bioconductor-minfidata
 bioconductor-mofa2
 bioconductor-org.hs.eg.db
 bioconductor-pcatools
@@ -142,6 +159,9 @@ bioconductor-psichomics
 bioconductor-qvalue
 bioconductor-sesame
 bioconductor-sesamedata
+bioconductor-singlecelltk
+bioconductor-sva
+bioconductor-txdbmaker
 r-abind
 r-argparser
 r-arrow
@@ -149,25 +169,33 @@ r-ape
 r-bedtoolsr
 r-biocmanager
 r-bitops
+r-catboost
 r-catools
 r-complexupset
 r-corrplot
+r-covr
 r-devtools
 r-flashpcar
 r-genio
+r-ggnewscale
 r-gplots
 r-gtools
 r-gwasrapidd
 r-httpgd
 r-hudson
 r-igraph
+r-itertools
 r-irkernel
+r-jackstraw
+r-jsonlite
 r-languageserver
 r-mediation
 r-missforest
 r-optparse
 r-pacman
 r-pecotmr
+r-peer
+r-pkgdown
 r-profvis
 r-qqman
 r-qrank
@@ -175,5 +203,7 @@ r-quantreg
 r-rgl
 r-rmtstat
 r-seurat
+r-testthat
 r-tidyverse
 r-watershedr
+r-xgboost
