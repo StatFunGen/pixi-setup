@@ -3,8 +3,7 @@ name: CI
 on:
   pull_request:
 
-jobs:
-  concurrency:
+concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
