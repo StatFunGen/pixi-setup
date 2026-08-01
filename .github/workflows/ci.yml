@@ -9,7 +9,7 @@ concurrency:
 
 jobs:
   ci:
-    name: CI (${{ matrix.platform }} / ${{ matrix.environment }})
+    name: CI (${{ matrix.runner }})
     runs-on: ${{ matrix.runner }}
     env:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

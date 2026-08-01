@@ -8,12 +8,12 @@ awscli
 bamtools
 bcftools
 bedtools
-coreutils
 curl
 deeptools
 diffutils
 ensembl-vep
 fastqc
+fastlmmc
 fastp
 findutils
 gatk4
@@ -41,9 +41,11 @@ picard
 polyfun
 plink
 plink2
+plinkseq
 python=3.12
 quantas
 r-base=4.5
+regenie
 regtools
 ripgrep
 rnaseqc
@@ -64,10 +66,8 @@ wget
 
 # [global_linux]
 code-server
-fastlmmc
 ldstore
 procps-ng
-regenie
 
 # [python]
 altair
