@@ -151,7 +151,6 @@ bioconductor-intact
 bioconductor-limma
 bioconductor-minfi
 bioconductor-minfidata
-bioconductor-mofa2
 bioconductor-org.hs.eg.db
 bioconductor-pcatools
 bioconductor-preprocesscore
