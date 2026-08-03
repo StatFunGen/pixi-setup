@@ -66,8 +66,10 @@ wget
 
 # [global_linux]
 code-server
-ldstore
 procps-ng
+
+# [global_linux64]
+ldstore
 
 # [python]
 altair

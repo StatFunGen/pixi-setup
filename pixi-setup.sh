@@ -151,7 +151,11 @@ else
         safe_expose_remove coreutils kill
         safe_expose_remove coreutils uptime
         install_global_packages <(extract_section "${_full_file}" "global_linux")
+        if [[ $(uname -a) =~ .*x86_64.* ]]; then
+            install_global_packages <(extract_section "${_full_file}" "global_linux64")
+        fi
     fi
+
 
     echo "Installing recommended R libraries ..."
     inject_packages r-base <(extract_section "${_full_file}" "r")
