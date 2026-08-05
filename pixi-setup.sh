@@ -105,6 +105,14 @@ else
     echo "Installation type: ${INSTALL_TYPE}"
 fi
 
+# Remember whether Pixi was available before this setup run. A first-time
+# install updates the shell startup file, which the current terminal has not
+# loaded yet.
+_pixi_was_available=1
+if ! command -v pixi >/dev/null 2>&1; then
+    _pixi_was_available=0
+fi
+
 # Ensure PIXI_HOME exists
 mkdir -p "${PIXI_HOME}"
 
@@ -172,6 +180,7 @@ fi
 
 # print messages
 BB='\033[1;34m'
+RED='\033[1;31m'
 NC='\033[0m'
 if [[ "$OSTYPE" == "darwin"* ]]; then
     _shell_config="${HOME}/.zshrc"
@@ -184,3 +193,8 @@ echo -e "${BB}and Python with 'pixi global install --environment python ...'${NC
 echo -e "${BB}To keep the package cache in ${PIXI_HOME}/cache across all future sessions,${NC}"
 echo -e "${BB}add this line to ${_shell_config}:${NC}"
 echo -e "${BB}  export RATTLER_CACHE_DIR=\"${PIXI_HOME}/cache\"${NC}"
+
+if [[ "${_pixi_was_available}" -eq 0 ]]; then
+    echo ""
+    echo -e "${RED}Please restart your terminal before using Pixi and the installed tools.${NC}"
+fi
