@@ -142,6 +142,7 @@ bioconductor-annotationdbi
 bioconductor-annotationhub
 bioconductor-biomart
 bioconductor-clusterprofiler
+bioconductor-dreamlet
 bioconductor-edger
 bioconductor-genomeinfodb
 bioconductor-genomeinfodbdata
