@@ -8,6 +8,7 @@ awscli
 bamtools
 bcftools
 bedtools
+bowtie2
 curl
 deeptools
 diffutils
@@ -32,6 +33,7 @@ htslib
 king
 kent-tools
 less
+macs2
 metal
 multiqc
 pandoc
@@ -144,6 +146,7 @@ bioconductor-biomart
 bioconductor-clusterprofiler
 bioconductor-dreamlet
 bioconductor-edger
+bioconductor-epigenomix
 bioconductor-genomeinfodb
 bioconductor-genomeinfodbdata
 bioconductor-illuminahumanmethylation450kmanifest
