@@ -6,6 +6,7 @@ safe_expose_remove() {
     environment=$1
     executable=$2
     if [ -d ${PIXI_HOME}/envs/${environment} ]; then
+        echo "Reached removal"
         exposed_exes=$(pixi global list --environment ${environment} | tail -n 3 | head -n 1 | tr ',' '\n')
         if [[ " ${exposed_exes[*]} " =~ [[:space:]]${executable}[[:space:]] ]]; then
             pixi global expose remove ${executable}
@@ -150,14 +151,12 @@ else
     install_global_packages <(extract_section "${_full_file}" "global")
 
     if [[ "$OSTYPE" =~ .*linux.* ]]; then
-        echo "Reached first removal"
         safe_expose_remove util-linux kill
     fi
 
     install_global_packages <(echo "coreutils")
 
     if [[ "$OSTYPE" =~ .*linux.* ]]; then
-        echo "Reached second removal"
         safe_expose_remove coreutils kill
         safe_expose_remove coreutils uptime
         install_global_packages <(extract_section "${_full_file}" "global_linux")
