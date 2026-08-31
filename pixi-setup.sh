@@ -149,13 +149,13 @@ else
 
     install_global_packages <(extract_section "${_full_file}" "global")
 
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    if [[ "$OSTYPE" =~ .*linux.* ]]; then
         safe_expose_remove util-linux kill
     fi
 
     install_global_packages <(echo "coreutils")
 
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    if [[ "$OSTYPE" =~ .*linux.* ]]; then
         safe_expose_remove coreutils kill
         safe_expose_remove coreutils uptime
         install_global_packages <(extract_section "${_full_file}" "global_linux")
@@ -182,7 +182,7 @@ fi
 BB='\033[1;34m'
 RED='\033[1;31m'
 NC='\033[0m'
-if [[ "$OSTYPE" == "darwin"* ]]; then
+if [[ "$OSTYPE" == .*darwin.* ]]; then
     _shell_config="${HOME}/.zshrc"
 else
     _shell_config="${HOME}/.bashrc"
