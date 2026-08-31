@@ -150,12 +150,14 @@ else
     install_global_packages <(extract_section "${_full_file}" "global")
 
     if [[ "$OSTYPE" =~ .*linux.* ]]; then
+        echo "Reached first removal"
         safe_expose_remove util-linux kill
     fi
 
     install_global_packages <(echo "coreutils")
 
     if [[ "$OSTYPE" =~ .*linux.* ]]; then
+        echo "Reached second removal"
         safe_expose_remove coreutils kill
         safe_expose_remove coreutils uptime
         install_global_packages <(extract_section "${_full_file}" "global_linux")
