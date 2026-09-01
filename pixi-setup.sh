@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -o nounset -o errexit -o pipefail
+set -o nounset -o errexit -o pipefail -o xtrace
 
 safe_expose_remove() {
     environment=$1
@@ -45,7 +45,7 @@ inject_packages() {
     if [ ! -d ${PIXI_HOME}/envs/${environment} ]; then
         missing_pkgs=$(cat ${package_list})
     else
-        missing_pkgs=$(comm -13 <(pixi global list --environment ${environment} | cut -f 1 -d ' ' | head -n -6 | tail -n +3 | sort -u) <(sort -u ${package_list}))
+        missing_pkgs=$(comm -13 <(pixi global list --json --environment r-base | jq '.[].dependencies.[].name' | tr -d '"') <(sort -u ${package_list}))
     fi
 
     if (( $(echo ${missing_pkgs} | wc -w) > 0 )); then
