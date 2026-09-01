@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-set -o nounset -o errexit -o pipefail -o xtrace
+set -o nounset -o errexit -o pipefail
 
 safe_expose_remove() {
     environment=$1
     executable=$2
     if [ -d ${PIXI_HOME}/envs/${environment} ]; then
-        exposed_exes=$(pixi global list --json --environment coreutils | jq '.[].exposed.[].exposed_name' | tr -d '"')
+        exposed_exes=$(pixi global list --json --environment ${environment} | jq '.[].exposed.[].exposed_name' | tr -d '"')
         if [[ " ${exposed_exes[*]} " =~ [[:space:]]${executable}[[:space:]] ]]; then
             echo "Reached removal"
             pixi global expose remove ${executable}
@@ -45,7 +45,7 @@ inject_packages() {
     if [ ! -d ${PIXI_HOME}/envs/${environment} ]; then
         missing_pkgs=$(cat ${package_list})
     else
-        missing_pkgs=$(comm -13 <(pixi global list --json --environment r-base | jq '.[].dependencies.[].name' | tr -d '"') <(sort -u ${package_list}))
+        missing_pkgs=$(comm -13 <(pixi global list --json --environment ${environment} | jq '.[].dependencies.[].name' | tr -d '"') <(sort -u ${package_list}))
     fi
 
     if (( $(echo ${missing_pkgs} | wc -w) > 0 )); then
