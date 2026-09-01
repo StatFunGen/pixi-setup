@@ -6,7 +6,7 @@ safe_expose_remove() {
     environment=$1
     executable=$2
     if [ -d ${PIXI_HOME}/envs/${environment} ]; then
-        exposed_exes=$(pixi global list --environment ${environment} | tail -n 3 | head -n 1 | tr ',' '\n')
+        exposed_exes=$(pixi global list --json --environment ${environment} | jq '.[].exposed.[].exposed_name' | tr -d '"')
         if [[ " ${exposed_exes[*]} " =~ [[:space:]]${executable}[[:space:]] ]]; then
             pixi global expose remove ${executable}
         fi
@@ -44,7 +44,7 @@ inject_packages() {
     if [ ! -d ${PIXI_HOME}/envs/${environment} ]; then
         missing_pkgs=$(cat ${package_list})
     else
-        missing_pkgs=$(comm -13 <(pixi global list --environment ${environment} | cut -f 1 -d ' ' | head -n -6 | tail -n +3 | sort -u) <(sort -u ${package_list}))
+        missing_pkgs=$(comm -13 <(pixi global list --json --environment ${environment} | jq '.[].dependencies.[].name' | tr -d '"') <(sort -u ${package_list}))
     fi
 
     if (( $(echo ${missing_pkgs} | wc -w) > 0 )); then
@@ -149,13 +149,13 @@ else
 
     install_global_packages <(extract_section "${_full_file}" "global")
 
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    if [[ "$OSTYPE" =~ .*linux.* ]]; then
         safe_expose_remove util-linux kill
     fi
 
     install_global_packages <(echo "coreutils")
 
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    if [[ "$OSTYPE" =~ .*linux.* ]]; then
         safe_expose_remove coreutils kill
         safe_expose_remove coreutils uptime
         install_global_packages <(extract_section "${_full_file}" "global_linux")
@@ -182,7 +182,7 @@ fi
 BB='\033[1;34m'
 RED='\033[1;31m'
 NC='\033[0m'
-if [[ "$OSTYPE" == "darwin"* ]]; then
+if [[ "$OSTYPE" == .*darwin.* ]]; then
     _shell_config="${HOME}/.zshrc"
 else
     _shell_config="${HOME}/.bashrc"
