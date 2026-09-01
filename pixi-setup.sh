@@ -6,7 +6,7 @@ safe_expose_remove() {
     environment=$1
     executable=$2
     if [ -d ${PIXI_HOME}/envs/${environment} ]; then
-        exposed_exes=$(pixi global list --environment ${environment} | tail -n 3 | head -n 1 | tr ',' '\n')
+        exposed_exes=$(pixi global --json --environment coreutils | jq '.[].exposed.[].exposed_name' | tr -d '"')
         if [[ " ${exposed_exes[*]} " =~ [[:space:]]${executable}[[:space:]] ]]; then
             echo "Reached removal"
             pixi global expose remove ${executable}
