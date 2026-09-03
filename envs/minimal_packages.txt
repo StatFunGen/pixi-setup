@@ -38,6 +38,7 @@ jupyter_core
 jupyter_server
 jupyter-lsp
 jupyterlab-lsp
+jupyterlab-sos
 matplotlib-base
 nb_conda_kernels
 nbconvert-core
@@ -56,6 +57,11 @@ python-lsp-server
 scikit-learn
 scipy
 seaborn
+sos
+sos-bash
+sos-notebook
+sos-python
+sos-r
 statsmodels
 sympy
 tqdm
