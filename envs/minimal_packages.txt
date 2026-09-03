@@ -13,7 +13,7 @@ parallel
 pandoc
 perl
 python=3.12
-r-base=4.4
+r-base=4.5
 ripgrep
 ruby
 sed
