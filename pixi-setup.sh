@@ -27,7 +27,7 @@ install_global_packages() {
     fi
 
     # Use the existing packages or empty string to compare with desired packages
-    missing_pkgs=$(comm -13 <(echo "$existing_pkgs" | LC_ALL=C sort -u) <(LC_ALL=C sort -u ${package_list}))
+    missing_pkgs=$(LC_ALL=C comm -13 <(echo "$existing_pkgs" | LC_ALL=C sort -u) <(LC_ALL=C sort -u ${package_list}))
 
     if (($(echo ${missing_pkgs} | wc -w) > 0 )); then
         pixi global install --run-post-link-scripts $(echo ${missing_pkgs} | tr '\n' ' ')
@@ -44,7 +44,7 @@ inject_packages() {
     if [ ! -d ${PIXI_HOME}/envs/${environment} ]; then
         missing_pkgs=$(cat ${package_list})
     else
-        missing_pkgs=$(comm -13 <(pixi global list --json --environment ${environment} | jq '.[].dependencies.[].name' | tr -d '"' | LC_ALL=C sort -u) <(LC_ALL=C sort -u ${package_list}))
+        missing_pkgs=$(LC_ALL=C comm -13 <(pixi global list --json --environment ${environment} | jq '.[].dependencies.[].name' | tr -d '"' | LC_ALL=C sort -u) <(LC_ALL=C sort -u ${package_list}))
     fi
 
     if (( $(echo ${missing_pkgs} | wc -w) > 0 )); then
