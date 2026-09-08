@@ -57,6 +57,7 @@ python-lsp-server
 scikit-learn
 scipy
 seaborn
+setuptools<82
 sos
 sos-bash
 sos-notebook
