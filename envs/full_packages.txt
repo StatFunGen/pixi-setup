@@ -120,6 +120,7 @@ pybigwig
 pytest
 pytest-cov
 pytest-xdist
+python=3.12
 python-ldstore
 python-lsp-server
 qvalue
