@@ -53,6 +53,7 @@ pandas
 pillow
 ptpython
 pyarrow
+python=3.12
 python-lsp-server
 scikit-learn
 scipy
