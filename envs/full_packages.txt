@@ -32,6 +32,7 @@ gzip
 htslib
 king
 kent-tools
+leafcutter2
 less
 macs2
 metal
