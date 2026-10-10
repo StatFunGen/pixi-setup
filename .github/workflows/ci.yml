@@ -34,6 +34,7 @@ jobs:
         env:
           INSTALL_TYPE: full
         run: |
-          sed -i "s?main?${{ github.event.pull_request.head.ref }}?g" pixi-setup.sh
-          sed -i "s?init.sh | bash?init.sh | sed 's,main,${{ github.event.pull_request.head.ref }},g' | bash?" pixi-setup.sh
+          REPO_REF="${{ github.event.pull_request.head.repo.full_name }}/${{ github.event.pull_request.head.ref }}"
+          sed -i "s?StatFunGen/pixi-setup/main?${REPO_REF}?g" pixi-setup.sh
+          sed -i "s?init.sh | bash?init.sh | sed 's,StatFunGen/pixi-setup/main,${REPO_REF},g' | bash?" pixi-setup.sh
           printf "\n1\n" | ./pixi-setup.sh
