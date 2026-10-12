@@ -45,7 +45,7 @@ polyfun
 plink
 plink2
 plinkseq
-python=3.12
+python=3.13
 quantas
 r-base=4.5
 regenie
@@ -134,7 +134,7 @@ tqdm
 tensorqtl
 wand
 widgetsnbextension
-setuptools<82
+setuptools
 sos
 sos-bash
 sos-notebook

@@ -12,7 +12,7 @@ less
 parallel
 pandoc
 perl
-python=3.12
+python=3.13
 r-base=4.5
 ripgrep
 ruby
@@ -58,7 +58,7 @@ python-lsp-server
 scikit-learn
 scipy
 seaborn
-setuptools<82
+setuptools
 sos
 sos-bash
 sos-notebook
