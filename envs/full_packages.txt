@@ -212,5 +212,6 @@ r-rmtstat
 r-seurat
 r-testthat
 r-tidyverse
+r-torino
 r-watershedr
 r-xgboost
